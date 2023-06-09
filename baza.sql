@@ -1,4 +1,3 @@
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -38,10 +37,10 @@ INSERT INTO `destinacije` (`id`, `planeta`, `udaljenost`, `vreme`, `polazak`) VA
 (10, 'Venera', '61000000 km', '2 dana', '2022-12-22'),
 (11, 'Jupiter', '588000000 km', '5 dana', '2022-12-23'),
 (25, 'Mars', '54600000 km', '2 dana', '2022-12-24'),
-('Merkur', '91700000 km', '3 dana', '2022-12-25'),
-('Saturn', '1200000000 km', '8 dana', '2022-12-26'),
-('Uran', '2900000000 km', '20 dana', '2022-12-27'),
-('Neptun', '4500000000 km', '30 dana', '2022-12-28');
+(13, 'Merkur', '91700000 km', '3 dana', '2022-12-25'),
+(22, 'Saturn', '1200000000 km', '8 dana', '2022-12-26'),
+(29, 'Uran', '2900000000 km', '20 dana', '2022-12-27'),
+(33, 'Neptun', '4500000000 km', '30 dana', '2022-12-28');
 
 -- --------------------------------------------------------
 
