@@ -22,11 +22,13 @@ class Destination
         return $conn->query($query);
     }
 
-    public static function deleteById($id, mysqli $conn)
+    public static function deleteByIds($ids, mysqli $conn)
     {
-        $query = "DELETE FROM destinations1 WHERE id=$id";
+        $idsString = implode(',', $ids);
+        $query = "DELETE FROM destinations1 WHERE id IN ($idsString)";
         return $conn->query($query);
     }
+
 
     public static function add($planet, $distance, $time, $departure, mysqli $conn)
     {
@@ -34,18 +36,16 @@ class Destination
         return $conn->query($query);
     }
 
-    public static function getById($id, mysqli $conn)
+    public static function update($id, $planet, $distance, $time, $departure, mysqli $conn)
     {
-        $query = "SELECT * FROM destinations1 WHERE id=$id";
-        $destinations = array();
-
-        if ($res = $conn->query($query)) {
-            while ($row = $res->fetch_array(1)) {
-                $destinations[] = $row;
-            }
+        $query = "UPDATE destinations1 SET planet=?, distance=?, time=?, departure=? WHERE id=?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ssssi", $planet, $distance, $time, $departure, $id);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
         }
-
-        return $destinations;
     }
 }
 ?>

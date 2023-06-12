@@ -1,5 +1,5 @@
 <?php 
-class Destination
+class Destination2
 {
     public $id;
     public $place;
@@ -22,31 +22,29 @@ class Destination
         return $conn->query($query);
     }
 
-    public static function deleteById($id, mysqli $conn)
+    public static function deleteByIds($ids, mysqli $conn)
     {
-        $query = "DELETE FROM destinations2 WHERE id=$id";
+        $idsString = implode(',', $ids);
+        $query = "DELETE FROM destinations2 WHERE id IN ($idsString)";
         return $conn->query($query);
     }
-
+    
     public static function add($place, $distance, $time, $departure, mysqli $conn)
     {
         $query = "INSERT INTO destinations2 (place, distance, time, departure) VALUES ('$place', '$distance', '$time', '$departure')";
         return $conn->query($query);
     }
 
-    public static function getById($id, mysqli $conn)
+    public static function update($id, $place, $distance, $time, $departure, mysqli $conn)
     {
-        $query = "SELECT * FROM destinations2 WHERE id=$id";
-        $destinations = array();
-
-        if ($res = $conn->query($query)) {
-            while ($row = $res->fetch_array(1)) {
-                $destinations[] = $row;
-            }
+        $query = "UPDATE destinations2 SET place=?, distance=?, time=?, departure=? WHERE id=?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ssssi", $place, $distance, $time, $departure, $id);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
         }
-
-        return $destinations;
     }
-
 }
 ?>
