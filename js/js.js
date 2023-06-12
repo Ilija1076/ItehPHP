@@ -1,6 +1,5 @@
 $("#addForm").submit(function (event) {
   event.preventDefault();
-
   const $form = $(this);
   const $inputs = $form.find("input, select, button");
   const serializedData = $form.serialize();
@@ -38,7 +37,6 @@ function lookup() {
   filter = input.value.toUpperCase();
   table = document.getElementById("table");
   tr = table.getElementsByTagName("tr");
-
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[2];
     if (td) {
@@ -91,8 +89,6 @@ $("#btn-edit").click(function () {
     selectedRow.addClass("editing");
     $("#btn-finish").show();
     console.log("Current Row ID: " + currentRowId);
-
-    // Get the column name (planet or place) from the table header
     const columnIndex = selectedRow.find("td:nth-child(3)").index();
     const columnName = $("th").eq(columnIndex).text().trim().toLowerCase();
     field = columnName;
